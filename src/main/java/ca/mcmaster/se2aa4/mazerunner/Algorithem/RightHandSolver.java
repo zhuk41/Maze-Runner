@@ -17,13 +17,13 @@ public class RightHandSolver implements MazeSolver {
     @Override
     public Path solve(){
         while(!explorer.atPoint(maze.getExit())){
-            if (!explorer.isWall(Direction.right(explorer.getFacing()),maze)) {
+            if (!maze.isWall(explorer.getLocation(),Direction.right(explorer.getFacing()))) {
                 explorer.turnRight();
                 path.addStep('R');
                 explorer.moveForward();
                 path.addStep('F');
             }
-            else if (!explorer.isWall(explorer.getFacing(),maze)){
+            else if (!maze.isWall(explorer.getLocation(),explorer.getFacing())){
                 explorer.moveForward();
                 path.addStep('F');
             }

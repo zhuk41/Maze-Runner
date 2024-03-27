@@ -21,9 +21,6 @@ public class Explorer {
     public boolean atPoint(Point point){
         return point.equals(location);
     }
-    public boolean isWall(Direction direction,Maze maze){
-        return maze.isWall(location, direction);
-    }
     public Point getLocation(){
         return location;
     }
