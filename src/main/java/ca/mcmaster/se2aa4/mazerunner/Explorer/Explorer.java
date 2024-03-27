@@ -1,6 +1,6 @@
 package ca.mcmaster.se2aa4.mazerunner.Explorer;
 
-import ca.mcmaster.se2aa4.mazerunner.Direction;
+import ca.mcmaster.se2aa4.mazerunner.Maze.Direction;
 import ca.mcmaster.se2aa4.mazerunner.Maze.*;
 public class Explorer {
     private Point location;

@@ -1,15 +1,14 @@
 package ca.mcmaster.se2aa4.mazerunner.Algorithem;
 
-import ca.mcmaster.se2aa4.mazerunner.Direction;
+import ca.mcmaster.se2aa4.mazerunner.Maze.Direction;
 import ca.mcmaster.se2aa4.mazerunner.Explorer.Explorer;
-import ca.mcmaster.se2aa4.mazerunner.MazeSolver;
 import ca.mcmaster.se2aa4.mazerunner.Maze.*;
 import ca.mcmaster.se2aa4.mazerunner.Path.Path;
 
 public class RightHandSolver implements MazeSolver {
     private final Explorer explorer;
     private final Maze maze;
-    private Path path;
+    private final Path path;
     public RightHandSolver(Maze the_maze){
         maze = the_maze;
         path = new Path();

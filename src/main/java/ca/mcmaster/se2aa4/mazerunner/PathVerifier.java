@@ -17,9 +17,9 @@ public class PathVerifier {
             if (path.stepAt(i) == 'R') explorer.turnRight();
             else if (path.stepAt(i) =='L') explorer.turnLeft();
             else if (path.stepAt(i) == 'F') explorer.moveForward();
-            if (!maze.inMaze(explorer.getLocation()))return false;
+            if (!maze.inMaze(explorer.getLocation())) return false;
 
-            if (maze.isWall(explorer.getLocation()))return false;
+            if (maze.isWall(explorer.getLocation())) return false;
         }
         Point exit =maze.getExit();
         return exit.equals(explorer.getLocation());

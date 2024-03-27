@@ -1,7 +1,5 @@
 package ca.mcmaster.se2aa4.mazerunner.Maze;
 
-import ca.mcmaster.se2aa4.mazerunner.Direction;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;

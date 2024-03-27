@@ -1,7 +1,5 @@
 package ca.mcmaster.se2aa4.mazerunner.Maze;
 
-import ca.mcmaster.se2aa4.mazerunner.Direction;
-
 public class Point{
     private final int  row;
     private final int  column;

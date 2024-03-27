@@ -1,6 +1,7 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
 
+import ca.mcmaster.se2aa4.mazerunner.Algorithem.MazeSolver;
 import ca.mcmaster.se2aa4.mazerunner.Algorithem.RightHandSolver;
 import ca.mcmaster.se2aa4.mazerunner.Path.Path;
 import ca.mcmaster.se2aa4.mazerunner.Maze.Maze;
