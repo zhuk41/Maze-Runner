@@ -3,7 +3,7 @@ import ca.mcmaster.se2aa4.mazerunner.Maze.Maze;
 import ca.mcmaster.se2aa4.mazerunner.Path.Path;
 
 public interface MazeSolver {
-    Maze maze = null;
-    Path path = null;
+    MazeSolver withMaze(Maze the_maze);
     Path solve();
+
 }

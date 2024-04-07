@@ -6,16 +6,18 @@ import ca.mcmaster.se2aa4.mazerunner.Maze.*;
 import ca.mcmaster.se2aa4.mazerunner.Path.Path;
 
 public class RightHandSolver implements MazeSolver {
-    private final Explorer explorer;
-    private final Maze maze;
-    private final Path path;
-    public RightHandSolver(Maze the_maze){
+    private Maze maze;
+    public RightHandSolver(){}
+    @Override
+    public MazeSolver withMaze(Maze the_maze) {
         maze = the_maze;
-        path = new Path();
-        explorer = new Explorer(maze.getStart(), maze.getStartDirection());
+        return this;
     }
+
     @Override
     public Path solve(){
+        Path path = new Path();
+        Explorer explorer = new Explorer(maze.getStart(), maze.getStartDirection());
         while(!explorer.atPoint(maze.getExit())){
             if (!maze.isWall(explorer.getLocation(),Direction.right(explorer.getFacing()))) {
                 explorer.turnRight();
@@ -23,7 +25,7 @@ public class RightHandSolver implements MazeSolver {
                 explorer.moveForward();
                 path.addStep('F');
             }
-            else if (!maze.isWall(explorer.getLocation(),explorer.getFacing())){
+            else if (!maze.isWall(explorer.getLocation(), explorer.getFacing())){
                 explorer.moveForward();
                 path.addStep('F');
             }

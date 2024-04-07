@@ -2,13 +2,15 @@ package ca.mcmaster.se2aa4.mazerunner;
 
 
 import ca.mcmaster.se2aa4.mazerunner.Algorithem.MazeSolver;
-import ca.mcmaster.se2aa4.mazerunner.Algorithem.RightHandSolver;
+import ca.mcmaster.se2aa4.mazerunner.Algorithem.SolverFactory;
 import ca.mcmaster.se2aa4.mazerunner.Path.Path;
 import ca.mcmaster.se2aa4.mazerunner.Maze.Maze;
-
+import ca.mcmaster.se2aa4.mazerunner.Maze.TxtMaze;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.io.IOException;
 
 public class Main {
 
@@ -20,10 +22,11 @@ public class Main {
         Configuration config = Configuration.load(args);
         try {
             logger.info("**** Reading the maze from file " + config.file().getName());
-            maze = new Maze(config.file(), true);
-        } catch (Exception e) {
+            maze = new TxtMaze(config.file(), true);
+        } catch (IOException e) {
             logger.error("/!\\ An error has occured /!\\");
             logger.info("PATH NOT COMPUTED");
+            e.printStackTrace();
         }
         if (config.path() != null){
             logger.info("**** Testing path ");
@@ -41,7 +44,8 @@ public class Main {
         }
         else{
             logger.info("**** Computing path");
-            MazeSolver solver = new RightHandSolver(maze);
+            SolverFactory solverFactory = new SolverFactory(maze);
+            MazeSolver solver = solverFactory.getSolver(config.method());
             Path path = solver.solve();
             path.printPath();
             path.printFactorizedPath();
