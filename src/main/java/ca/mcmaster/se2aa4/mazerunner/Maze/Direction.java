@@ -22,4 +22,13 @@ public enum Direction{
             default -> EAST;
         };
     }
+    public char DirectionChar(){
+        return switch (this) {
+            case EAST -> 'E';
+            case NORTH -> 'N';
+            case WEST -> 'W';
+            default -> 'S';
+
+        };
+    }
 }

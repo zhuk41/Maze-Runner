@@ -21,8 +21,11 @@ public class Point{
     public int getColumn(){
         return column;
     }
-
-    public boolean equals(Point point){
-        return (point.row == this. row) && (point.column == this.column);
+    @Override
+    public boolean equals(Object o){
+        if (o instanceof Point){
+            return (((Point) o).row == this. row) && (((Point) o).column == this.column);
+        }
+        return false;
     }
 }
