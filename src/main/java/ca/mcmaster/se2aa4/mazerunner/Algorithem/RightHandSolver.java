@@ -19,7 +19,7 @@ public class RightHandSolver implements MazeSolver {
         Path path = new Path();
         Explorer explorer = new Explorer(maze.getStart(), maze.getStartDirection());
         while(!explorer.atPoint(maze.getExit())){
-            if (!maze.isWall(explorer.getLocation(),Direction.right(explorer.getFacing()))) {
+            if (!maze.isWall(explorer.getLocation(),(explorer.getFacing().right()))) {
                 explorer.turnRight();
                 path.addStep('R');
                 explorer.moveForward();

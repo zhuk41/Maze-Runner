@@ -4,7 +4,8 @@ public class Path {
     private String path ;
     public Path(){path ="";}
     public Path(String pathString){
-        path = pathString;
+        path = pathString.replaceAll(" ","");
+        this.unFactorize();
     }
     public void printPath(){
         System.out.println( "** Path: "+path);
@@ -45,7 +46,7 @@ public class Path {
         f.append(path.charAt(path.length()-1));
         return f.toString();
     }
-    public Path unFactorize(){
+    private void unFactorize(){
         StringBuilder u = new StringBuilder();
         int num = -1;
         for (int i = 0; i < path.length();i++){
@@ -65,7 +66,7 @@ public class Path {
                 u.append(path.charAt(i));
             }
         }
-        return new Path(u.toString());
+        path = u.toString();
     }
 
 }

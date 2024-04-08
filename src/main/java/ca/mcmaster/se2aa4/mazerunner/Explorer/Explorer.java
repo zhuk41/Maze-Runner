@@ -10,10 +10,10 @@ public class Explorer {
         location = start;
     }
     public void turnRight(){
-        facing = Direction.right(facing);
+        facing = facing.right();
     }
     public void turnLeft(){
-        facing = Direction.left(facing);
+        facing = facing.left();
     }
     public void moveForward() {
         location = location.NearbyPoint(facing);

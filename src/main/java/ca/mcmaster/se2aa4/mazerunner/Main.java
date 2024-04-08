@@ -31,9 +31,7 @@ public class Main {
         if (config.path() != null){
             logger.info("**** Testing path ");
             PathVerifier path_verifier = new PathVerifier(maze);
-            Path path = new Path(config.path()
-                    .replaceAll(" ",""))
-                    .unFactorize();
+            Path path = new Path(config.path());
             path.printPath();
             boolean is_real_path = path_verifier.verify(path);
             if (is_real_path){
