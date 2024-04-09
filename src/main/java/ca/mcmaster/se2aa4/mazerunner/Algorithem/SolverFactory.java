@@ -6,11 +6,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SolverFactory {
+    private static SolverFactory  solverFactory = null;
     private final Map<String,MazeSolver> solverList;
-    public SolverFactory(Maze the_maze){
+    private SolverFactory(){
         solverList = new HashMap<>();
-        solverList.put("righthand", new RightHandSolver().withMaze(the_maze));
-        solverList.put("bfs",new BreathFirstSearch().withMaze(the_maze));
+        solverList.put("righthand", new RightHandSolver());
+        solverList.put("bfs",new BreathFirstSearch());
+    }
+    public static SolverFactory getInstance(){
+        if (solverFactory==null){
+            solverFactory = new SolverFactory();
+        }
+        return solverFactory;
     }
     public MazeSolver getSolver(String name){
         return solverList.get(name);
