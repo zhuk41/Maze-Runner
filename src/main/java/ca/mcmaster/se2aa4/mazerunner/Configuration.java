@@ -1,7 +1,12 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
 import java.io.File;
-import org.apache.commons.cli.*;
+
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
+import org.apache.commons.cli.CommandLine;
 
 public record Configuration(File file,String path,String method,String baseline) {
     public static Configuration load(String[] args) throws ParseException {

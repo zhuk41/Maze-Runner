@@ -21,8 +21,8 @@ public class DirectedPoint {
     @Override
     public boolean equals(Object o){
         if (o instanceof DirectedPoint dP){
-            return (location.equals(dP.getLocation()))
-                    && (dP.getDirection() == this.getDirection());
+            return location.equals(dP.getLocation())
+                    && dP.getDirection() == this.getDirection();
         }
         return false;
     }

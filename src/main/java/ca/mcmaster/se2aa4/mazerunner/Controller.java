@@ -3,13 +3,11 @@ package ca.mcmaster.se2aa4.mazerunner;
 import ca.mcmaster.se2aa4.mazerunner.algorithem.MazeSolver;
 import ca.mcmaster.se2aa4.mazerunner.algorithem.SolverFactory;
 import ca.mcmaster.se2aa4.mazerunner.maze.Maze;
-import ca.mcmaster.se2aa4.mazerunner.maze.TxtMaze;
+import ca.mcmaster.se2aa4.mazerunner.maze.MazeBuilder;
 import ca.mcmaster.se2aa4.mazerunner.path.Path;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 
 public class Controller {
@@ -27,9 +25,8 @@ public class Controller {
         }
         try {
             logger.info("**** Reading the maze from file " + config.file().getName());
-            BufferedReader reader = new BufferedReader(new FileReader(config.file()));
-            maze = new TxtMaze(reader, true);
-            reader.close();
+            MazeBuilder mazeBuilder = new MazeBuilder();
+            maze = mazeBuilder.fileBuild(config.file(), true);
         } catch (IOException e) {
             logger.error("/!\\ An error has happened /!\\");
             logger.info("PATH NOT COMPUTED");

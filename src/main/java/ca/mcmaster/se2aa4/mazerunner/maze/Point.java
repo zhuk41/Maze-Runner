@@ -1,5 +1,7 @@
 package ca.mcmaster.se2aa4.mazerunner.maze;
 
+import java.util.Objects;
+
 public class Point{
     private final int  row;
     private final int  column;
@@ -24,8 +26,13 @@ public class Point{
     @Override
     public boolean equals(Object o){
         if (o instanceof Point){
-            return (((Point) o).row == this. row) && (((Point) o).column == this.column);
+            return ((Point) o).row == this. row && ((Point) o).column == this.column;
         }
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(row, column);
     }
 }

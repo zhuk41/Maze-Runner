@@ -2,7 +2,8 @@ package ca.mcmaster.se2aa4.mazerunner;
 
 
 import ca.mcmaster.se2aa4.mazerunner.explorer.Explorer;
-import ca.mcmaster.se2aa4.mazerunner.maze.*;
+import ca.mcmaster.se2aa4.mazerunner.maze.Maze;
+import ca.mcmaster.se2aa4.mazerunner.maze.Point;
 import ca.mcmaster.se2aa4.mazerunner.path.Path;
 
 public class PathVerifier {
@@ -31,7 +32,7 @@ public class PathVerifier {
                 return false;
             }
         }
-        Point exit =maze.getExit();
+        Point exit = maze.getExit();
         return exit.equals(explorer.getLocation());
     }
 }
