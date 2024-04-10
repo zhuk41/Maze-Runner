@@ -18,22 +18,24 @@ public class Controller {
     public Controller(Configuration configArgs){
         config = configArgs;
         timer = new Timer();
-        timer.start();
+
         if (config.file() == null){
             logger.info("**** No file Provided ");
             return;
         }
         try {
             logger.info("**** Reading the maze from file " + config.file().getName());
+            timer.start();
             MazeBuilder mazeBuilder = new MazeBuilder();
             maze = mazeBuilder.fileBuild(config.file(), true);
+            timer.stop();
+            System.out.printf("Time taken to create maze: %1.2fms\n",timer.getMilliseconds());
         } catch (IOException e) {
             logger.error("/!\\ An error has happened /!\\");
-            logger.info("PATH NOT COMPUTED");
-            e.printStackTrace(System.out);
+            logger.info("Invalid Maze file");
         }
-        timer.stop();
-        System.out.printf("Time taken to create maze: %1.2fms\n",timer.getMilliseconds());
+
+
     }
     public void run(){
         if (maze == null){
@@ -61,7 +63,7 @@ public class Controller {
         if (real){
             System.out.println("*** Path is Correct");
         } else {
-            System.out.println("*** Path is Wrong");
+            System.out.println("*** Path is Incorrect");
         }
     }
     private void benchmark(){

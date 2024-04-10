@@ -25,89 +25,72 @@ This program explores a maze, finding a path from an entry point to an exit one.
 - A factorized path squashes together similar instructions (i.e., `FFF` = `3F`, `LL` = `2L`).
 - Spaces are ignored in the instruction sequence (only for readability: `FFLFF` = `FF L FF`)
 - The program takes as input a maze and print the path on the standard output.
-    - For this assignment, the path does not have to be the shortest one.
-- The program can take a path as input and verify if it's a legit one.
+
 
 ## How to run this software?
 
 To build the program, simply package it with Maven:
 
 ```
-mosser@azrael A1-Template % mvn -q clean package 
+% mvn -q clean package 
+%
 ```
 
-### Provided version (starter code)
-
-The starter code assumes the maze file name is the first argument. 
+When called on a non-existing file, it stops and ends.
 
 ```
-mosser@azrael A1-Template % java -jar target/mazerunner.jar -i ./examples/small.maz.txt
-** Starting Maze Runner
-**** Reading the maze from file ./examples/small.maz.txt
-WALL WALL WALL WALL WALL WALL WALL WALL WALL WALL WALL 
-WALL PASS PASS PASS PASS PASS PASS PASS PASS PASS WALL 
-WALL WALL WALL PASS WALL WALL WALL PASS WALL WALL WALL 
-WALL PASS PASS PASS PASS PASS WALL PASS PASS PASS WALL 
-WALL PASS WALL PASS WALL WALL WALL WALL WALL PASS WALL 
-WALL PASS WALL PASS PASS PASS PASS PASS WALL PASS PASS 
-WALL WALL WALL PASS WALL PASS WALL WALL WALL WALL WALL 
-WALL PASS PASS PASS WALL PASS PASS PASS PASS PASS WALL 
-PASS PASS WALL PASS WALL PASS WALL WALL WALL PASS WALL 
-WALL PASS WALL PASS WALL PASS WALL PASS PASS PASS WALL 
-WALL WALL WALL WALL WALL WALL WALL WALL WALL WALL WALL 
-**** Computing path
-PATH NOT COMPUTED
-** End of MazeRunner
+% java -jar target/mazerunner.jar -i ./examples/medium.maz.txtd
+[INFO ] Main ** Starting Maze Runner
+[INFO ] Controller **** Reading the maze from file medium.maz.txtd
+[ERROR] Controller /!\ An error has happened /!\
+[INFO ] Controller Invalid Maze file
+[INFO ] Controller **** No Maze Found
+[INFO ] Main ** End of MazeRunner
+%
 ```
 
-When called on a non-existing file. it prints an error message
 
-```
-mosser@azrael A1-Template % java -jar target/mazerunner.jar ./examples/small.maz.txtd
-** Starting Maze Runner
-**** Reading the maze from file ./examples/small.maz.txtd
-/!\ An error has occured /!\
-**** Computing path
-PATH NOT COMPUTED
-** End of MazeRunner
-```
+### Command line arguments
 
-### Delivered version
+The program uses the following flags:
 
-#### Command line arguments
-
-The delivered program at the end of this assignment should use the following flags:
-
-- `-i MAZE_FILE`: specifies the filename to be used;
+- `-i MAZE_FILE`: specifies the filename to be used.
 - `-p PATH_SEQUENCE`: activates the path verification mode to validate that PATH_SEQUENCE is correct for the maze
-
-If you are also delivering the bonus, your program will react to a third flag:
-
-- `-method {tremaux, righthand}`: specifies which path computation method to use. (default is right hand)
-
+- `-method {bfs, righthand}`: specifies which path computation method to use.
+- `-baseline {bfs, righthand}`: if provided with -method will return time taken to run both methods and speedup based on number of path steps reduced.
 #### Examples
 
 When no logs are activated, the programs only print the computed path on the standard output.
 
 ```
-mosser@azrael A1-Template % java -jar target/mazerunner.jar -i ./examples/straight.maz.txt
-4F
-mosser@azrael A1-Template %
+% java -jar target/mazerunner.jar -i ./examples/straight.maz.txt -method bfs
+** Path: FFFF
+** Factorized Path: "4F"
+%
 ```
 
-If a given path is correct, the program prints the message `correct path` on the standard output.
+If a given path is correct, the program prints the message `*** Path is Correct` on the standard output.
 
 ```
-mosser@azrael A1-Template % java -jar target/mazerunner.jar -i ./examples/straight.maz.txt -p 4F
-correct path
-mosser@azrael A1-Template %
+% java -jar target/mazerunner.jar -i ./examples/straight.maz.txt -p 4F
+** Path is Correct
+%
 ```
 
-If a given path is incorrect, the program prints the message `incorrect path` on the standard output.
+If a given path is incorrect, the program prints the message `*** Path is Incorrect` on the standard output.
 
 ```
-mosser@azrael A1-Template % java -jar target/mazerunner.jar -i ./examples/straight.maz.txt -p 3F
-inccorrect path
-mosser@azrael A1-Template %
+% java -jar target/mazerunner.jar -i ./examples/straight.maz.txt -p 3F
+*** Path is Incorrect
+%
 ```
+If given both a method and baseline it will return runtimes and compare path length(Speedup).
 
+```
+% java -jar target/mazerunner.jar -i ./examples/medium.maz.txt -method bfs -baseline righthand
+Time taken to create maze: 8.04ms
+Time taken to solve maze with bfs: 1.98ms
+Time taken to solve maze with righthand: 4.60ms
+Speedup: 7.23
+%
+```
