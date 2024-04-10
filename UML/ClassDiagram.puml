@@ -1,0 +1,106 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class Main
+
+class Controller {
+run()
+    }
+class Timer{
+    + start():void
+    + stop():void
+    +  getMilliseconds():double
+    }
+class PathVerifier{
+    - Maze maze
+    - verify(Path):boolean
+    }
+class Configuration{
+     +static load(String[] args):Configuration
+
+     }
+package "algorithem"{
+interface MazeSolver{
+    + MazeSolver withMaze(Maze):void
+    + MazePath solve():Path
+    }
+class BreathFirstSearch
+class RightHandSolver
+class SolverFactory{
+    + static getInstance(): SolverFactory
+    + getSolver(String name):MazeSolver
+    }
+}
+
+
+package "maze"{
+enum Direction{
+NORTH
+SOUTH
+EAST
+WEST
+}
+interface Maze{
+    + isWall(Point):boolean
+    + solve():MazePath
+}
+class TxtMaze
+class MazeBuilder{
+fileBuild(File,boolean): Maze
+stringArrayBuild(List<String> maze, boolean leftStart): Maze
+    }
+class Point{
+    + nearbyPoint(Direction): Point
+    + getRow():int
+    + getColumn():int
+
+    }
+class DirectedPoint{
+    + getDirection():Direction
+
+    }
+}
+package "explorer"{
+class Explorer{
+     +turnRight():void
+     +turnLeft():void
+     +moveForward():void
+     +atPoint(Point):boolean
+     +getLocation():Point
+     +Direction getFacing():Direction
+     }
+}
+package "mazepath"{
+class MazePath{
+    + printPath():void
+    + printFactorizedPath():void
+    + addStep(char step):void
+    + length():int
+    + stepAt(int index):char
+    + factorize():String
+    + unFactorize():void
+    }
+}
+BreathFirstSearch..|>MazeSolver
+RightHandSolver..|>MazeSolver
+TxtMaze..|> Maze
+Main --|> Configuration
+Main--|> Controller
+Controller--|> Timer
+Controller --|> MazeBuilder
+MazeBuilder --|> Maze
+Controller --|> SolverFactory
+Controller --|> PathVerifier
+Controller--|> MazeSolver
+SolverFactory--|> RightHandSolver
+RightHandSolver *--Explorer
+Explorer--|> Point
+SolverFactory --|> BreathFirstSearch
+BreathFirstSearch--|> DirectedPoint
+BreathFirstSearch--|> Maze
+RightHandSolver--|> Maze
+Maze--|> Point
+DirectedPoint *-- Point
+DirectedPoint *-- Direction
+PathVerifier --|> MazePath
+@enduml
