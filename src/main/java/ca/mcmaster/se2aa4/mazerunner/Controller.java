@@ -4,7 +4,7 @@ import ca.mcmaster.se2aa4.mazerunner.algorithem.MazeSolver;
 import ca.mcmaster.se2aa4.mazerunner.algorithem.SolverFactory;
 import ca.mcmaster.se2aa4.mazerunner.maze.Maze;
 import ca.mcmaster.se2aa4.mazerunner.maze.MazeBuilder;
-import ca.mcmaster.se2aa4.mazerunner.path.Path;
+import ca.mcmaster.se2aa4.mazerunner.mazepath.MazePath;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -24,12 +24,12 @@ public class Controller {
             return;
         }
         try {
-            logger.info("**** Reading the maze from file " + config.file().getName());
+            logger.info("**** Reading the maze from file {}", config.file().getName());
             timer.start();
             MazeBuilder mazeBuilder = new MazeBuilder();
             maze = mazeBuilder.fileBuild(config.file(), true);
             timer.stop();
-            System.out.printf("Time taken to create maze: %1.2fms\n",timer.getMilliseconds());
+            System.out.printf("Time taken to create maze: %1.2fms%n",timer.getMilliseconds());
         } catch (IOException e) {
             logger.error("/!\\ An error has happened /!\\");
             logger.info("Invalid Maze file");
@@ -57,9 +57,9 @@ public class Controller {
     }
     private void pathTest(){
         PathVerifier pathVerifier = new PathVerifier(maze);
-        Path path = new Path(config.path());
-        path.printPath();
-        boolean real = pathVerifier.verify(path);
+        MazePath mazePath = new MazePath(config.path());
+        mazePath.printPath();
+        boolean real = pathVerifier.verify(mazePath);
         if (real){
             System.out.println("*** Path is Correct");
         } else {
@@ -73,23 +73,23 @@ public class Controller {
         MazeSolver baseSolver = solverFactory.getSolver(config.baseline()).withMaze(maze);
 
         timer.start();
-        Path newPath = newSolver.solve();
+        MazePath newMazePath = newSolver.solve();
         timer.stop();
-        System.out.printf("Time taken to solve maze with %s: %1.2fms\n",config.method(),timer.getMilliseconds());
+        System.out.printf("Time taken to solve maze with %s: %1.2fms%n",config.method(),timer.getMilliseconds());
 
         timer.start();
-        Path basePath = baseSolver.solve();
+        MazePath baseMazePath = baseSolver.solve();
         timer.stop();
-        System.out.printf("Time taken to solve maze with %s: %1.2fms\n",config.baseline(),timer.getMilliseconds());
+        System.out.printf("Time taken to solve maze with %s: %1.2fms%n",config.baseline(),timer.getMilliseconds());
 
-        double speedUp = (double) basePath.length() / newPath.length();
-        System.out.printf("Speedup: %1.2f\n", speedUp);
+        double speedUp = (double) baseMazePath.length() / newMazePath.length();
+        System.out.printf("Speedup: %1.2f%n", speedUp);
     }
     private void solve(){
         SolverFactory solverFactory = SolverFactory.getInstance();
         MazeSolver solver = solverFactory.getSolver(config.method()).withMaze(maze);
-        Path path = solver.solve();
-        path.printPath();
-        path.printFactorizedPath();
+        MazePath mazePath = solver.solve();
+        mazePath.printPath();
+        mazePath.printFactorizedPath();
     }
 }

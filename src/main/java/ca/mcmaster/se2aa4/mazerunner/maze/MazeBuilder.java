@@ -6,13 +6,14 @@ import java.util.List;
 
 public class MazeBuilder {
     public Maze fileBuild(File file, boolean leftStart) throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-        List<String> maze = new ArrayList<>();
-        while (reader.ready()){
-            maze.add(reader.readLine());
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            List<String> maze = new ArrayList<>();
+            while (reader.ready()) {
+                maze.add(reader.readLine());
+            }
+            return stringArrayBuild(maze, leftStart);
         }
-        reader.close();
-        return stringArrayBuild(maze,leftStart);
+
     }
     public Maze stringArrayBuild(List<String> maze, boolean leftStart){
         int width = maze.get(0).length();

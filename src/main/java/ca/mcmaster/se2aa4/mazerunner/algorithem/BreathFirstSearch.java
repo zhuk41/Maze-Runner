@@ -2,7 +2,7 @@ package ca.mcmaster.se2aa4.mazerunner.algorithem;
 
 import ca.mcmaster.se2aa4.mazerunner.maze.DirectedPoint;
 import ca.mcmaster.se2aa4.mazerunner.maze.Maze;
-import ca.mcmaster.se2aa4.mazerunner.path.Path;
+import ca.mcmaster.se2aa4.mazerunner.mazepath.MazePath;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -18,7 +18,7 @@ public class BreathFirstSearch implements MazeSolver {
     }
 
     @Override
-    public Path solve() {
+    public MazePath solve() {
 
         Queue<DirectedPoint> pointQueue = new LinkedList<>();
         Map<DirectedPoint, DirectedPoint> previousPointMap = new HashMap<>(); //location and direction of previous point
@@ -68,6 +68,6 @@ public class BreathFirstSearch implements MazeSolver {
             current =previous;
         }
         rawPath.reverse();
-        return new Path(rawPath.toString());
+        return new MazePath(rawPath.toString());
     }
 }

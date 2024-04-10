@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PointTest {
     @Test
-    public void pointTest(){
+    void pointTest(){
         Point pointA = new Point(0,0);
         Point pointB = new Point(1,1);
         Point pointC = new Point(0,0);

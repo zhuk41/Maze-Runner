@@ -4,7 +4,7 @@ package ca.mcmaster.se2aa4.mazerunner;
 import ca.mcmaster.se2aa4.mazerunner.explorer.Explorer;
 import ca.mcmaster.se2aa4.mazerunner.maze.Maze;
 import ca.mcmaster.se2aa4.mazerunner.maze.Point;
-import ca.mcmaster.se2aa4.mazerunner.path.Path;
+import ca.mcmaster.se2aa4.mazerunner.mazepath.MazePath;
 
 public class PathVerifier {
     private final Maze maze;
@@ -12,16 +12,16 @@ public class PathVerifier {
     PathVerifier(Maze maze){
         this.maze = maze;
     }
-    public boolean verify(Path path){
+    public boolean verify(MazePath mazePath){
         Explorer explorer = new Explorer(maze.getStart(),maze.getStartDirection());
-        for(int i = 0; i < path.length(); i++ ){
-            if (path.stepAt(i) == 'R') {
+        for(int i = 0; i < mazePath.length(); i++ ){
+            if (mazePath.stepAt(i) == 'R') {
                 explorer.turnRight();
             }
-            else if (path.stepAt(i) =='L') {
+            else if (mazePath.stepAt(i) =='L') {
                 explorer.turnLeft();
             }
-            else if (path.stepAt(i) == 'F') {
+            else if (mazePath.stepAt(i) == 'F') {
                 explorer.moveForward();
             }
             if (!maze.inMaze(explorer.getLocation())) {

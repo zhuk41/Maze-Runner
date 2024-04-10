@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class TxtMazeTest {
     Maze maze = null;
     @BeforeEach
-    public void makeMaze(){
+    void makeMaze(){
         String[] mazeString = new String[]{"###########",
                 "#         #",
                 "### ### ###",
@@ -26,21 +26,21 @@ class TxtMazeTest {
         maze = mazeBuilder.stringArrayBuild(Arrays.asList(mazeString),true);
     }
     @Test
-    public void startTest(){
+    void startTest(){
         Point expectedStart = new Point(8,0);
         assertEquals(expectedStart,maze.getStart());
     }
     @Test
-    public void exitTest(){
+    void exitTest(){
         Point expectedExit = new Point(5,10);
         assertEquals(expectedExit,maze.getExit());
     }
     @Test
-    public void directionTest(){
+    void directionTest(){
         assertEquals(Direction.EAST,maze.getStartDirection());
     }
     @Test
-    public void wallTest(){
+    void wallTest(){
         assertTrue(maze.isWall(new Point(0,0)));
         assertFalse(maze.isWall(new Point(1,1)));
     }

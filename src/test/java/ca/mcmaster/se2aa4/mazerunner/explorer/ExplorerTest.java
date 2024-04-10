@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ExplorerTest {
     @Test
-    public void explorerTest(){
+    void explorerTest(){
         Explorer explorer = new Explorer(new Point(0,0), Direction.EAST);
         assertEquals(new Point(0,0),explorer.getLocation());
         assertEquals(Direction.EAST,explorer.getFacing());

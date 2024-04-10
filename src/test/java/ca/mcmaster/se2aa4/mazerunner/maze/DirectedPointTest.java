@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class DirectedPointTest {
     private DirectedPoint d1;
     @BeforeEach
-    public void makePoints(){
+    void makePoints(){
         d1 = new DirectedPoint( new Point(0,0), Direction.EAST);
     }
     @Test

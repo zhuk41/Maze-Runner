@@ -2,7 +2,7 @@ package ca.mcmaster.se2aa4.mazerunner.algorithem;
 
 import ca.mcmaster.se2aa4.mazerunner.explorer.Explorer;
 import ca.mcmaster.se2aa4.mazerunner.maze.Maze;
-import ca.mcmaster.se2aa4.mazerunner.path.Path;
+import ca.mcmaster.se2aa4.mazerunner.mazepath.MazePath;
 
 public class RightHandSolver implements MazeSolver {
     private Maze maze;
@@ -13,25 +13,25 @@ public class RightHandSolver implements MazeSolver {
     }
 
     @Override
-    public Path solve(){
-        Path path = new Path();
+    public MazePath solve(){
+        MazePath mazePath = new MazePath();
         Explorer explorer = new Explorer(maze.getStart(), maze.getStartDirection());
         while(!explorer.atPoint(maze.getExit())){
             if (!maze.isWall(explorer.getLocation(),explorer.getFacing().right())) {
                 explorer.turnRight();
-                path.addStep('R');
+                mazePath.addStep('R');
                 explorer.moveForward();
-                path.addStep('F');
+                mazePath.addStep('F');
             }
             else if (!maze.isWall(explorer.getLocation(), explorer.getFacing())){
                 explorer.moveForward();
-                path.addStep('F');
+                mazePath.addStep('F');
             }
             else{
                 explorer.turnLeft();
-                path.addStep('L');
+                mazePath.addStep('L');
             }
         }
-        return path;
+        return mazePath;
     }
 }

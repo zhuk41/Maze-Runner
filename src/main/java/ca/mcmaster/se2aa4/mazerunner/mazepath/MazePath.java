@@ -1,10 +1,10 @@
-package ca.mcmaster.se2aa4.mazerunner.path;
+package ca.mcmaster.se2aa4.mazerunner.mazepath;
 
-public class Path {
+public class MazePath {
     private String path ;
-    public Path(){path ="";}
-    public Path(String pathString){
-        path = pathString.replaceAll(" ","");
+    public MazePath(){path ="";}
+    public MazePath(String pathString){
+        path = pathString.replace(" ","");
         this.unFactorize();
     }
     public void printPath(){
@@ -57,9 +57,8 @@ public class Path {
             }
             else if (num != -1) {
                 int count = Integer.parseInt(path.substring(num,i));
-                for (int j = 0; j < count; j++){
-                    u.append(path.charAt(i));
-                }
+                u.append(String.valueOf(
+                                path.charAt(i)).repeat(Math.max(0, count)));
                 num = -1;
             }
             else if (path.charAt(i) == 'F'||path.charAt(i) == 'L'||path.charAt(i) == 'R'){
