@@ -1,4 +1,4 @@
-package ca.mcmaster.se2aa4.mazerunner.Maze;
+package ca.mcmaster.se2aa4.mazerunner.maze;
 
 public enum Direction{
     NORTH,
@@ -20,15 +20,6 @@ public enum Direction{
             case NORTH -> WEST;
             case WEST -> SOUTH;
             default -> EAST;
-        };
-    }
-    public char DirectionChar(){
-        return switch (this) {
-            case EAST -> 'E';
-            case NORTH -> 'N';
-            case WEST -> 'W';
-            default -> 'S';
-
         };
     }
 }

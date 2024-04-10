@@ -1,4 +1,4 @@
-package ca.mcmaster.se2aa4.mazerunner.Path;
+package ca.mcmaster.se2aa4.mazerunner.path;
 
 public class Path {
     private String path ;
@@ -55,7 +55,7 @@ public class Path {
                     num = i;
                 }
             }
-            else if (!(num==-1)) {
+            else if (num != -1) {
                 int count = Integer.parseInt(path.substring(num,i));
                 for (int j = 0; j < count; j++){
                     u.append(path.charAt(i));

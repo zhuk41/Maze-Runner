@@ -1,17 +1,19 @@
-package ca.mcmaster.se2aa4.mazerunner.Maze;
+package ca.mcmaster.se2aa4.mazerunner.maze;
+
+import java.util.Objects;
 
 public class DirectedPoint {
     private final Direction direction;
     private final Point location;
-    public DirectedPoint(Point p,Direction the_direction) {
+    public DirectedPoint(Point p,Direction direction) {
         location = p;
-        direction = the_direction;
+        this.direction = direction;
     }
     public Direction getDirection(){
         return direction;
     }
     public Point nearbyPoint(Direction d){
-        return location.NearbyPoint(d);
+        return location.nearbyPoint(d);
     }
     public Point getLocation(){
         return location;
@@ -23,5 +25,10 @@ public class DirectedPoint {
                     && (dP.getDirection() == this.getDirection());
         }
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(direction, location);
     }
 }

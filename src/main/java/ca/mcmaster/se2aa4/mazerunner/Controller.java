@@ -1,13 +1,15 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
-import ca.mcmaster.se2aa4.mazerunner.Algorithem.MazeSolver;
-import ca.mcmaster.se2aa4.mazerunner.Algorithem.SolverFactory;
-import ca.mcmaster.se2aa4.mazerunner.Maze.Maze;
-import ca.mcmaster.se2aa4.mazerunner.Maze.TxtMaze;
-import ca.mcmaster.se2aa4.mazerunner.Path.Path;
+import ca.mcmaster.se2aa4.mazerunner.algorithem.MazeSolver;
+import ca.mcmaster.se2aa4.mazerunner.algorithem.SolverFactory;
+import ca.mcmaster.se2aa4.mazerunner.maze.Maze;
+import ca.mcmaster.se2aa4.mazerunner.maze.TxtMaze;
+import ca.mcmaster.se2aa4.mazerunner.path.Path;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 
 public class Controller {
@@ -19,9 +21,15 @@ public class Controller {
         config = configArgs;
         timer = new Timer();
         timer.start();
+        if (config.file() == null){
+            logger.info("**** No file Provided ");
+            return;
+        }
         try {
             logger.info("**** Reading the maze from file " + config.file().getName());
-            maze = new TxtMaze(config.file(), true);
+            BufferedReader reader = new BufferedReader(new FileReader(config.file()));
+            maze = new TxtMaze(reader, true);
+            reader.close();
         } catch (IOException e) {
             logger.error("/!\\ An error has happened /!\\");
             logger.info("PATH NOT COMPUTED");
@@ -31,6 +39,10 @@ public class Controller {
         System.out.printf("Time taken to create maze: %1.2fms\n",timer.getMilliseconds());
     }
     public void run(){
+        if (maze == null){
+            logger.info("**** No Maze Found ");
+            return;
+        }
         if (config.path() != null){
             logger.info("**** Testing path ");
             pathTest();
@@ -45,11 +57,11 @@ public class Controller {
         }
     }
     private void pathTest(){
-        PathVerifier path_verifier = new PathVerifier(maze);
+        PathVerifier pathVerifier = new PathVerifier(maze);
         Path path = new Path(config.path());
         path.printPath();
-        boolean is_real_path = path_verifier.verify(path);
-        if (is_real_path){
+        boolean real = pathVerifier.verify(path);
+        if (real){
             System.out.println("*** Path is Correct");
         } else {
             System.out.println("*** Path is Wrong");
@@ -71,7 +83,7 @@ public class Controller {
         timer.stop();
         System.out.printf("Time taken to solve maze with %s: %1.2fms\n",config.baseline(),timer.getMilliseconds());
 
-        double speedUp = (double)(basePath.length()) / (newPath.length());
+        double speedUp = (double) basePath.length() / newPath.length();
         System.out.printf("Speedup: %1.2f\n", speedUp);
     }
     private void solve(){

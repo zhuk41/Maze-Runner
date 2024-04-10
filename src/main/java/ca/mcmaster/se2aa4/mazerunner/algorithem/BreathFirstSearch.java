@@ -1,8 +1,8 @@
-package ca.mcmaster.se2aa4.mazerunner.Algorithem;
+package ca.mcmaster.se2aa4.mazerunner.algorithem;
 
-import ca.mcmaster.se2aa4.mazerunner.Maze.DirectedPoint;
-import ca.mcmaster.se2aa4.mazerunner.Maze.Maze;
-import ca.mcmaster.se2aa4.mazerunner.Path.Path;
+import ca.mcmaster.se2aa4.mazerunner.maze.DirectedPoint;
+import ca.mcmaster.se2aa4.mazerunner.maze.Maze;
+import ca.mcmaster.se2aa4.mazerunner.path.Path;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -11,11 +11,9 @@ import java.util.Queue;
 
 public class BreathFirstSearch implements MazeSolver {
     private Maze maze;
-    public BreathFirstSearch(){}
-
     @Override
-    public MazeSolver withMaze(Maze the_maze) {
-        maze = the_maze;
+    public MazeSolver withMaze(Maze maze) {
+        this.maze = maze;
         return this;
     }
 
@@ -52,7 +50,7 @@ public class BreathFirstSearch implements MazeSolver {
             }
             current = pointQueue.poll();
         }
-        while (current!= null && !(current.getLocation()).equals(maze.getExit()));
+        while (current!= null && !current.getLocation().equals(maze.getExit()));
         if (current== null){
             throw new IllegalArgumentException("Invalid Maze");
         }

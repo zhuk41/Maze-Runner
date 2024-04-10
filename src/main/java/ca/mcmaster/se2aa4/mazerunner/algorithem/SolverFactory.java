@@ -1,11 +1,9 @@
-package ca.mcmaster.se2aa4.mazerunner.Algorithem;
-
-import ca.mcmaster.se2aa4.mazerunner.Maze.Maze;
+package ca.mcmaster.se2aa4.mazerunner.algorithem;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class SolverFactory {
+public final class SolverFactory {
     private static SolverFactory  solverFactory = null;
     private final Map<String,MazeSolver> solverList;
     private SolverFactory(){

@@ -30,7 +30,7 @@ public record Configuration(File file,String path,String method,String baseline)
             method = cmd.getOptionValue(methodArg);
         }
         if (cmd.hasOption(baselineArg)) {
-            baseline = (cmd.getOptionValue(baselineArg));
+            baseline = cmd.getOptionValue(baselineArg);
         }
         return new Configuration(file,path,method,baseline);
     }
