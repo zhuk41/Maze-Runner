@@ -1,0 +1,43 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+
+Main-> Configuration:args
+Configuration-> Main: config
+Main -> Controller:  initialize(config)
+Controller-> MazeBuilder: build(file)
+MazeBuilder-> Maze: build(): Maze
+Maze -> Controller
+Controller -> Main:
+Main-> Controller:run()
+group hasPath
+Controller -> PathVerifier: path
+PathVerifier -> Controller : isRealPath
+end
+group hasMethod
+group hasBaseline
+
+Controller -> SolverFactory: baseline,method
+SolverFactory -> Controller: MazeSolver(method,solver
+Controller -> MazeSolver:withMaze(maze)
+MazeSolver -> Controller
+Controller -> Timer:start()
+Timer-> Controller:
+Controller -> MazeSolver:solve()
+Controller -> Timer:stop()
+Timer -> Controller:
+Controller -> Timer: getMilliseconds()
+Timer -> Controller: time
+
+end
+group noBaseline
+Controller -> SolverFactory: method
+SolverFactory -> Controller: MazeSolver
+Controller -> MazeSolver:withMaze(maze)
+MazeSolver -> Controller
+Controller -> MazeSolver:Solve
+MazeSolver -> Controller:path
+end
+end
+Controller -> Main
+@enduml
